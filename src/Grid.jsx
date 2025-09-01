@@ -12,13 +12,14 @@ export default function Grid() {
 
   return (
     <div className="w-full flex justify-center items-center">
-      <div className="relative w-full h-[85vh] min-h-[650px]">
+      <div className="relative w-full h-[89vh] min-h-[590px]">
         {/* Container for the grid lines - centered */}
         <div className="relative w-full h-full flex justify-center">
           <div className="w-full">
             {salaryLines.map((line, index) => {
-              // Calculate vertical position: evenly distribute 24 lines across 85vh
+
               // First line at top (0), last line at bottom (85vh)
+
               const topPosition = (index / (salaryLines.length - 1)) * 100;
               
               return (
