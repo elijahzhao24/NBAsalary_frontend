@@ -11,11 +11,11 @@ export default function Grid() {
   });
 
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="relative w-full h-[89vh] min-h-[590px]">
+    <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <div style={{position: 'relative', width: '100%', height: '89vh', minHeight: '590px'}}>
         {/* Container for the grid lines - centered */}
-        <div className="relative w-full h-full flex justify-center">
-          <div className="w-full">
+        <div style={{position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center'}}>
+          <div style={{width: '100%'}}>
             {salaryLines.map((line, index) => {
 
               // First line at top (0), last line at bottom (85vh)
@@ -25,27 +25,25 @@ export default function Grid() {
               return (
                 <div
                   key={index}
-                  className="absolute w-full flex items-center"
-                  style={{ top: `${topPosition}%` }}
+                  style={{ position: 'absolute', width: '100%', display: 'flex', alignItems: 'center', top: `${topPosition}%` }}
                 >
                   {/* Three-container layout with proper centering */}
-                  <div className="w-full flex justify-center ">
-                    <div className="flex items-center w-[60%]">
+                  <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+                    <div style={{display: 'flex', alignItems: 'center', width: '60%'}}>
                       {/* Left container - Money amount */}
-                      <div className="w-[5%] flex justify-end"
-                      style={{ fontSize: '14px' , paddingRight: '10px'}}>
-                        <span className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                      <div style={{width: '5%', display: 'flex', justifyContent: 'flex-end', fontSize: '14px', paddingRight: '10px'}}>
+                        <span style={{fontSize: '14px', fontWeight: '500', color: '#374151', whiteSpace: 'nowrap'}}>
                           {line.formattedAmount}
                         </span>
                       </div>
                       
                       {/* Middle container - Line */}
-                      <div className="w-[90%] flex justify-center">
-                        <div className="w-full h-px bg-[#000000]" />
+                      <div style={{width: '90%', display: 'flex', justifyContent: 'center'}}>
+                        <div style={{width: '100%', height: '1px', backgroundColor: '#000000'}} />
                       </div>
                       
                       {/* Right container - Placeholder */}
-                      <div className="w-[5%] flex justify-start pl-2">
+                      <div style={{width: '5%', display: 'flex', justifyContent: 'flex-start', paddingLeft: '8px'}}>
                         {/* Placeholder content can go here */}
                       </div>
                     </div>

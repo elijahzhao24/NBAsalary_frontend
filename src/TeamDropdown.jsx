@@ -42,30 +42,38 @@ export default function TeamDropdown({ isOpen, onSelectTeam, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black z-50 flex items-start justify-end pt-20 pr-6 ">
-      <div className="bg-white rounded-lg shadow-xl w-[70%] max-w-6xl max-h-[80vh] overflow-y-auto border">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Select a Team</h2>
+    <div style={{position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 50, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', paddingTop: '80px', paddingRight: '24px'}}>
+      <div style={{backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', width: '70%', maxWidth: '72rem', maxHeight: '80vh', overflowY: 'auto', border: '1px solid #e5e7eb'}}>
+        <div style={{padding: '24px'}}>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
+            <h2 style={{fontSize: '24px', fontWeight: 'bold', color: '#1f2937'}}>Select a Team</h2>
             <button 
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center"
+              style={{color: '#6b7280', fontSize: '24px', fontWeight: 'bold', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent', border: 'none', cursor: 'pointer'}}
             >
               ×
             </button>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '16px'}}>
             {teams.map((team) => (
               <button
                 key={team.id}
                 onClick={() => handleTeamSelect(team)}
-                className="p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-[#999999] transition-all duration-200 text-center group"
+                style={{padding: '16px', border: '1px solid #e5e7eb', borderRadius: '8px', backgroundColor: 'white', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s'}}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#eff6ff';
+                  e.target.style.borderColor = '#999999';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'white';
+                  e.target.style.borderColor = '#e5e7eb';
+                }}
               >
-                <div className="font-bold text-lg text-gray-800 group-hover:text-blue-600">
+                <div style={{fontWeight: 'bold', fontSize: '18px', color: '#1f2937'}}>
                   {team.code}
                 </div>
-                <div className="text-sm text-gray-600 mt-1 group-hover:text-blue-500">
+                <div style={{fontSize: '14px', color: '#6b7280', marginTop: '4px'}}>
                   {team.name}
                 </div>
               </button>
