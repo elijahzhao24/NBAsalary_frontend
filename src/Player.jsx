@@ -5,8 +5,9 @@ const Player = ({ name, salary, image, cardColor }) => {
 
   // Calculate height based on salary percentage of grid height
   const calculateHeight = () => {
-    const gridHeight = Math.max(89 * window.innerHeight / 100, 590);
-    const salaryPercentage = salary / 240000000; // $0 to $240M range
+    // Match Grid.jsx height calculation: 89vh with minHeight 590px
+    const gridHeight = Math.max(window.innerHeight * 0.89, 590);
+    const salaryPercentage = salary / 230000000; // $0 to $230M range
     return salaryPercentage * gridHeight;
   };
 
