@@ -79,10 +79,10 @@ const Team = ({ onPlayersChange }) => {
     // $20M is at index 21, etc.
     
     const salaryInMillions = salary / 10000000;
-    const index = 23 - salaryInMillions; // $0 = index 23, $10M = index 22, etc.
+    const index = 23 - salaryInMillions  ; // $0 = index 23, $10M = index 22, etc.
     const topPosition = (index / 23) * 100; // Same as grid: (index / (length-1)) * 100
 
-    return topPosition + (0.4 / 23) * 100;
+    return topPosition + (0.36/ 23) * 100;
   };
   
   const zeroPosition = getGridPosition(0);
