@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Logo from './assets/Logo.png';
+import Logo from './assets/logo.png';
 import LogoText from './assets/fulllogo.png';
 import { FiGithub, FiChevronDown } from 'react-icons/fi';
 import TeamDropdown from './TeamDropdown';
