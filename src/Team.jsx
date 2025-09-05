@@ -19,10 +19,7 @@ const Team = ({ onPlayersChange }) => {
     const fetchPlayers = async () => {
       setLoading(true);
       try {
-        // Use proxy in development, direct API in production
-        const apiUrl = import.meta.env.DEV 
-          ? `/api/players/team?code=${teamCode}`
-          : `${import.meta.env.VITE_API_BASE_URL}/api/players/team?code=${teamCode}`;
+        const apiUrl = `/api/players/team?code=${teamCode}`;
         
         const response = await fetch(apiUrl);
         if (response.ok) {
@@ -88,7 +85,7 @@ const Team = ({ onPlayersChange }) => {
     return topPosition + (0.37 / 23) * 100;
   };
   
-  const zeroPosition = getGridPosition(0); // This will be 100%
+  const zeroPosition = getGridPosition(0);
   
   return (
     <div 
