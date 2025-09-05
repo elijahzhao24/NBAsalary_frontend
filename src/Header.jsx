@@ -76,7 +76,7 @@ export default function Header() {
                 </button>
 
                 <button 
-                    onClick={() => window.open('https://github.com/elijahzhao24')}
+                    onClick={() => window.open('https://github.com/elijahzhao24/NBAsalary')}
                     style={{padding: '8px', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', borderRadius: '8px'}}>
                         <FiGithub style={{color: '#bbbbbb', width: '24px', height: '24px'}}/>
                 </button>

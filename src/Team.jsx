@@ -9,12 +9,7 @@ const Team = ({ onPlayersChange }) => {
   
   // Extract team code from URL
   const teamCode = location.pathname === '/' ? null : location.pathname.slice(1);
-  const colors = ['#60a5fa', '#ff5c44', '#58d434',
-    '#d0cccc', '#ff8cc4', '#68fce4', '#ffa404', '#ffec4c','#0894fc','#88848c', '#ff3c94', 
-    '#bfdbfe', '#84fc4c', '#f4e89c'
-  ];
 
-  
   useEffect(() => {
     if (!teamCode) {
       setPlayers([]);
@@ -24,7 +19,7 @@ const Team = ({ onPlayersChange }) => {
     const fetchPlayers = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`/api/players/team?code=${teamCode}`); // Using Vite proxy
+        const response = await fetch(`/api/players/team?code=${teamCode}`);
         if (response.ok) {
           const data = await response.json();
           setPlayers(data);
@@ -57,6 +52,22 @@ const Team = ({ onPlayersChange }) => {
   // Filter out players making less than $1M and sort from highest to lowest salary
   const filteredPlayers = players.filter(player => player.salary >= 1000000);
   const sortedPlayers = [...filteredPlayers].sort((a, b) => b.salary - a.salary);
+  
+  // Color array for player cards
+  const colors = ['#60a5fa', '#ff5c44', '#58d434', '#d0cccc', '#ff8cc4', '#68fce4', '#ffa404', '#ffec4c', '#0894fc', '#88848c', '#ff3c94', '#bfdbfe', '#84fc4c', '#f4e89c', '#24e0c8', '#ffd42c'];
+  
+  // Calculate colors: first player gets random starting point, then sequential
+  const getPlayerColors = () => {
+    if (sortedPlayers.length === 0) return [];
+    
+    const randomStart = Math.floor(Math.random() * colors.length);
+    return sortedPlayers.map((_, index) => {
+      const colorIndex = (randomStart + index) % colors.length;
+      return colors[colorIndex];
+    });
+  };
+  
+  const playerColors = getPlayerColors();
 
   // Use the exact same positioning logic as the grid
   const getGridPosition = (salary) => {
@@ -69,7 +80,7 @@ const Team = ({ onPlayersChange }) => {
     const index = 23 - salaryInMillions; // $0 = index 23, $10M = index 22, etc.
     const topPosition = (index / 23) * 100; // Same as grid: (index / (length-1)) * 100
 
-    return topPosition + (0.4 / 23) * 100;
+    return topPosition + (0.37 / 23) * 100;
   };
   
   const zeroPosition = getGridPosition(0); // This will be 100%
@@ -83,26 +94,17 @@ const Team = ({ onPlayersChange }) => {
         zIndex: 40
       }}
     >
-      <div className="flex justify-center">
-        {colors.map((color, index) => (
-          <div 
-            key={index} 
-            className="w-4 h-4 rounded-full" 
-            style={{ backgroundColor: color }} 
-          />
-        ))}
-        
-      </div>
-      <div className="flex flex-col" style={{minHeight: '0px'}}>
-        {sortedPlayers.map((player) => (
-          <Player
-            key={player.id}
-            name={player.name}
-            salary={player.salary}
-            image={player.salary >= 10000000 ? (player.headshotUrl || null) : null}
-          />
-        ))}
-      </div>
+              <div className="flex flex-col" style={{minHeight: '0px'}}>
+          {sortedPlayers.map((player, index) => (
+            <Player
+              key={player.id}
+              name={player.name}
+              salary={player.salary}
+              image={player.salary >= 10000000 ? (player.headshotUrl || null) : null}
+              cardColor={playerColors[index]}
+            />
+          ))}
+        </div>
     </div>
   );
 };

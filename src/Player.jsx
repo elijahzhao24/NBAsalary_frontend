@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Player = ({ name, salary, image }) => {
-
+const Player = ({ name, salary, image, cardColor }) => {
   const [cardHeight, setCardHeight] = useState(0);
 
   // Calculate height based on salary percentage of grid height
@@ -32,6 +31,7 @@ const Player = ({ name, salary, image }) => {
   // Determine layout based on salary
   const isVeryLowSalary = salary < 3000000; // < $3M
   const isLowSalary = salary < 14000000; // < $14M
+  const isMediumSalary = salary < 25000000; // < $25M
   
   const formatSalary = (salary) => {
     if (salary >= 1000000) {
@@ -51,9 +51,8 @@ const Player = ({ name, salary, image }) => {
         width: '30vw',
         minWidth: '150px',
         minHeight: '0px',
-        backgroundColor: '#ff5c44',
-        background: '#ff5c44',
-        border: cardHeight > 10 ? '0.1px solid #3b82f6' : '0.1px solid #3b82f6',
+        backgroundColor: cardColor,
+        background: cardColor,
         zIndex: 40,
         position: 'relative',
         flexShrink: 0
@@ -79,8 +78,7 @@ const Player = ({ name, salary, image }) => {
             {formatSalary(salary)}
           </div>
         </div>
-      ) : (
-        // Layout for ≥$10M: image left, name and salary stacked right
+      ) : isMediumSalary ? (
         <div className="flex items-center h-full p-3">
           {/* Left side - Player image */}
           <div className="flex items-center justify-center pr-3">
@@ -95,10 +93,34 @@ const Player = ({ name, salary, image }) => {
           
           {/* Right side - Name and salary stacked */}
           <div className="flex flex-col justify-center flex-1">
-            <div className="text-xl font-bold text-black">
+            <div className="text-lg font-bold text-black">
               {name}
             </div>
             <div className="text-xs text-black" style={{marginTop: '-2px'}}>
+              {formatSalary(salary)}
+            </div>
+          </div>
+        </div>
+      ) : (
+        // Layout for ≥$25M: image left, name and salary stacked right
+        <div className="flex items-center h-full p-3">
+          {/* Left side - Player image */}
+          <div className="flex items-center justify-center pr-3">
+            {image && (
+              <img 
+                src={image} 
+                alt={name}
+                className="w-12 h-12 rounded-full"
+              />
+            )}
+          </div>
+          
+          {/* Right side - Name and salary stacked */}
+          <div className="flex flex-col justify-center flex-1">
+            <div className="text-2xl font-bold text-black">
+              {name}
+            </div>
+            <div className="text-lg text-black" style={{marginTop: '-2px'}}>
               {formatSalary(salary)}
             </div>
           </div>
