@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://demo-deployment-nbasalary-latest.onrender.com/api/$1"
+    }
+  ]
+}

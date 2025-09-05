@@ -19,7 +19,12 @@ const Team = ({ onPlayersChange }) => {
     const fetchPlayers = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`/api/players/team?code=${teamCode}`);
+        // Use proxy in development, direct API in production
+        const apiUrl = import.meta.env.DEV 
+          ? `/api/players/team?code=${teamCode}`
+          : `${import.meta.env.VITE_API_BASE_URL}/api/players/team?code=${teamCode}`;
+        
+        const response = await fetch(apiUrl);
         if (response.ok) {
           const data = await response.json();
           setPlayers(data);
